@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Pattern, Category
 from PIL import Image
-from django.core.files.storage import default_storage as storage
 
 
 
@@ -24,41 +23,28 @@ class PatternSerializer(serializers.ModelSerializer):
         fields = 'id', 'title', 'category', 'pattern'
 
 
+class ImageFieldSerializer(serializers.Serializer):
+    def to_representation(self, value):
+        if value and hasattr(value, 'url'):
+            img = Image.open(value.path)
+            width, height = img.size
+            request = self.context.get('request')
+            img_url = request.build_absolute_uri(value.url)
+            return {
+                'width': width,
+                'height': height,
+                'img': img_url
+            }
+        return None
+
 class PatternDetailSerializer(serializers.ModelSerializer):
-    pattern_resolution = serializers.SerializerMethodField()
-    scheme_resolution = serializers.SerializerMethodField()
-    scheme_description_resolution = serializers.SerializerMethodField()
+    pattern = ImageFieldSerializer()
+    scheme = ImageFieldSerializer()
+    scheme_description = ImageFieldSerializer()
 
     class Meta:
         model = Pattern
         fields = '__all__'
-
-    def get_pattern_resolution(self, obj):
-        if obj.pattern:
-            image_path = obj.pattern.path
-            if storage.exists(image_path):
-                with storage.open(image_path, 'rb') as image_file:
-                    image = Image.open(image_file)
-                    return f'{image.width}x{image.height}'
-        return None
-
-    def get_scheme_resolution(self, obj):
-        if obj.scheme:
-            image_path = obj.scheme.path
-            if storage.exists(image_path):
-                with storage.open(image_path, 'rb') as image_file:
-                    image = Image.open(image_file)
-                    return f'{image.width}x{image.height}'
-        return None
-
-    def get_scheme_description_resolution(self, obj):
-        if obj.scheme_description:
-            image_path = obj.scheme_description.path
-            if storage.exists(image_path):
-                with storage.open(image_path, 'rb') as image_file:
-                    image = Image.open(image_file)
-                    return f'{image.width}x{image.height}'
-        return None
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
