@@ -17,10 +17,6 @@ from PIL import Image
 #         return expanded_fields + self.Meta.extra_fields
 
 
-class PatternSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Pattern
-        fields = 'id', 'title', 'category', 'pattern'
 
 
 class ImageFieldSerializer(serializers.Serializer):
@@ -37,6 +33,12 @@ class ImageFieldSerializer(serializers.Serializer):
             }
         return None
 
+class PatternSerializer(serializers.ModelSerializer):
+    pattern = ImageFieldSerializer()
+    class Meta:
+        model = Pattern
+        fields = 'id', 'title', 'category', 'pattern'
+        
 class PatternDetailSerializer(serializers.ModelSerializer):
     pattern = ImageFieldSerializer()
     scheme = ImageFieldSerializer()
