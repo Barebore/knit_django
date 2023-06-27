@@ -17,8 +17,6 @@ from PIL import Image
 #         return expanded_fields + self.Meta.extra_fields
 
 
-
-
 class ImageFieldSerializer(serializers.Serializer):
     def to_representation(self, value):
         if value and hasattr(value, 'url'):
@@ -38,7 +36,7 @@ class PatternSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pattern
         fields = 'id', 'title', 'category', 'pattern'
-        
+
 class PatternDetailSerializer(serializers.ModelSerializer):
     pattern = ImageFieldSerializer()
     scheme = ImageFieldSerializer()
