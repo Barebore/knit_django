@@ -41,15 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pattern_lib',
     'socks',
-    'odin_ass',
-    'knowledge_library',
+    #'knowledge_library',
     'sorl.thumbnail',
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
     'corsheaders',
-    'ckeditor',
-    'tinymce',
+    #'ckeditor',
+    #'tinymce',
     'django_extensions',
 
 ]

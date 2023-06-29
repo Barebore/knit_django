@@ -1,8 +1,7 @@
-from rest_framework import serializers
-from .models import Pattern, Category
 from PIL import Image
+from rest_framework import serializers
 
-
+from .models import Category, Pattern
 
 # class PatternSerializer(serializers.ModelSerializer):
 #     category_title = serializers.ReadOnlyField(source='category.title')

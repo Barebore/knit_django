@@ -1,13 +1,15 @@
-from rest_framework import viewsets
-from .models import Category, Article, Media, Term, TestRichText
-from .serializers import (CategorySerializer, ArticleSerializer,
-                           MediaSerializer, TermSerializer, TestRichTextSerializer,)
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.pagination import LimitOffsetPagination
 import spacy
-from spacy.matcher import PhraseMatcher
-from spacy.lang.ru.examples import sentences
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
+from spacy.lang.ru.examples import sentences
+from spacy.matcher import PhraseMatcher
+
+from .models import Article, Category, Media, Term, TestRichText
+from .serializers import (ArticleSerializer, CategorySerializer,
+                          MediaSerializer, TermSerializer,
+                          TestRichTextSerializer)
 
 nlp = spacy.load('ru_core_news_sm')
 

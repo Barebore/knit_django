@@ -1,10 +1,11 @@
-import reference_data.size_data
-import instructions.stich_set
 import instructions.cuffs
 import instructions.heels
 import instructions.sole
+import instructions.stich_set
 import instructions.toe
+import reference_data.size_data
 import reference_data.some_text
+
 
 def begin_text_end(about, text):
     '''Форматирует вывод данных'''

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Category, Article, Media, Term, TestRichText, TinyMCEText
+
+from .models import Article, Category, Media, Term, TestRichText, TinyMCEText
 
 
 class MediaInline(admin.TabularInline):

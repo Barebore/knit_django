@@ -1,9 +1,7 @@
-from django.db import models
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.db import models
 from tinymce.models import HTMLField
-
-
 
 
 class Category(models.Model):
@@ -12,6 +10,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        app_label = 'knowledge_library'
 
 class Article(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -21,6 +22,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        app_label = 'knowledge_library'
 
 class Media(models.Model):
     ARTICLE = 1
@@ -38,6 +42,9 @@ class Media(models.Model):
 
     def __str__(self):
         return f'{self.get_media_type_display()}'
+    
+    class Meta:
+        app_label = 'knowledge_library'
 
 class Term(models.Model):
     term = models.CharField(max_length=255)
@@ -46,6 +53,9 @@ class Term(models.Model):
     def __str__(self):
         return self.term
     
+    class Meta:
+        app_label = 'knowledge_library'
+    
 class TestRichText(models.Model):
     title = models.CharField(max_length=200)
     content = RichTextUploadingField()
@@ -53,9 +63,15 @@ class TestRichText(models.Model):
     def __str__(self):
         return self.title
     
+    class Meta:
+        app_label = 'knowledge_library'
+    
 class TinyMCEText(models.Model):
     title = models.CharField(max_length=200)
     content = HTMLField()
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        app_label = 'knowledge_library'

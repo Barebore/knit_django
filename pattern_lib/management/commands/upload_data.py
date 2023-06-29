@@ -1,11 +1,14 @@
 import os
 from contextlib import ExitStack
-from PIL import Image
-from django.core.management.base import BaseCommand
+from random import randint
+
 from django.core.files import File
 from django.core.files.images import ImageFile
+from django.core.management.base import BaseCommand
+from PIL import Image
+
 from ...models import Category, Pattern
-from random import randint
+
 
 def crop_image_square(image_path, input_image_dir):
     img = Image.open(image_path)

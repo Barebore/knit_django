@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Category, Article, Media, Term, TestRichText
+
+from .models import Article, Category, Media, Term, TestRichText
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
