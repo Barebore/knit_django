@@ -258,3 +258,5 @@ GRAPH_MODELS ={
 'all_applications': True,
 'graph_models': True,
 }
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'
